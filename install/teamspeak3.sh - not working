@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# get the present working directory
+pwd=`pwd`
+
+# switch to opt so we can install it there
+cd /opt
+
+# download the file
+# TODO: Figure out a way to get the current version
+wget http://dl.4players.de/ts/releases/3.0.19.1/TeamSpeak3-Client-linux_amd64-3.0.19.1.run
+
+# make it executable
+chmod u+x TeamSpeak3-Client-linux_amd64-3.0.19.1.run
+
+# run the install script
+./TeamSpeak3-Client-linux_amd64-3.0.19.1.run
+
+########################################################
+
+# The above command requires some user input afterward.
+# Gotta figure that out.
+
+########################################################
+
+# create the launcher for all users
+cat << EOF > /usr/share/applications/TeamSpeak3.desktop
+[Desktop Entry]
+Name=TeamSpeak 3
+Comment=TeamSpeak 3 VoIP Communicator
+Exec=/opt/TeamSpeak3-Client-linux_amd64/ts3client_runscript.sh
+Terminal=false
+Type=Application
+Categories=Network;Application;
+Icon=/opt/TeamSpeak3-Client-linux_amd64/styles/default/logo-128x128.png
+EOF
+
+# cleanup
+rm TeamSpeak3-Client-linux_amd64-3.0.19.1.run
+
+# return to the original directory
+cd $pwd
+
+
