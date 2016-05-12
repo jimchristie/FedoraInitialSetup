@@ -3,27 +3,41 @@
 pwd=`pwd`
 installsDirectory="$pwd/install"
 logFile="$pwd/log"
+user=`whoami`
 
 initialLoop(){
-	for filename in `ls *.sh` 
+	cd init
+
+	for initFile in `ls *.sh` 
 	do
-		chmod 665 $filename > $logFile 2>&1
-		./$filename >> $logFile 2>&1
+		chown $SUDO_USER $initFile
+		chgrp $SUDO_USER $initFile			
+		chmod 665 $initFile > $logFile 2>&1;
+		./$initFile >> $logFile 2>&1;
 	done
+
+	cd ..
 }
 
 installLoop(){
 	cd $installsDirectory
+
 	for installFile in `ls *.sh`
 	do	
-		chmod 665 $installFile >> $logFile 2>&1
-		./$installFile >> $logFile 2>&1
+		chown $SUDO_USER $installFile
+		chgrp $SUDO_USER $installFile
+		chmod 665 $installFile >> $logFile 2>&1;
+		./$installFile >> $logFile 2>&1;
 
 	done
+
 	cd ..
 }
 
 initialLoop
 
 installLoop
+
+chown $SUDO_USER $logFile
+chgrp $SUDO_USER $logFile
 
