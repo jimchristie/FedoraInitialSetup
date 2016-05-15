@@ -1,3 +1,4 @@
 #!/bin/bash
 
-sudo dnf install vlc -y
+# Depends on RPMFusion
+dnf install vlc -y
