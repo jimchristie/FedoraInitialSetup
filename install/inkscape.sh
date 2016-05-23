@@ -1,3 +1,5 @@
 #!/bin/bash
 
-sudo dnf install inkscape -y
+source ../init/packageManager.sh
+
+$packageManager install inkscape -y

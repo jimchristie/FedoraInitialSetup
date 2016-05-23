@@ -1,3 +1,5 @@
 #!/bin/bash
 
-sudo dnf install icedtea-web java-openjdk -y
+source ../init/packageManager.sh
+
+$packageManager install icedtea-web java-openjdk -y

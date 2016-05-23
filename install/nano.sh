@@ -1,3 +1,5 @@
 #!/bin/bash
 
-sudo dnf install nano -y
+source ../init/packageManager.sh
+
+$packageManager install nano -y

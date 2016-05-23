@@ -1,3 +1,5 @@
 #!/bin/bash
 
-sudo dnf install docky -y
+source ../init/packageManager.sh
+
+$packageManager install docky -y

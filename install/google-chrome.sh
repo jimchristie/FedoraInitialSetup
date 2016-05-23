@@ -1,28 +1,5 @@
 #!/bin/bash
 
-#$REPO_FILE="/etc/yum.repos.d/google-chrome.repo"
-
-#touch $REPO_FILE
-
-# Enable the repo
-#cat << EOF > $REPO_FILE
-#[google-chrome]
-#name=google-chrome - \$basearch
-#baseurl=http://dl.google.com/linux/chrome/rpm/stable/\$basearch
-#enabled=1
-#gpgcheck=1
-#gpgkey=https://dl-ssl.google.com/linux/linux_signing_key.pub
-#EOF
-
-#install
-#dnf install google-chrome-stable -y
-
-#######################################################################
-
-#ALTERNATE METHOD
-
-#######################################################################
-
 # download
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
 
@@ -31,3 +8,27 @@ dnf install google-chrome-stable_current_x86_64.rpm -y
 
 # cleanup
 rm google-chrome-stable_current_x86_64.rpm
+
+
+
+
+
+
+source ../init/packageManager.sh
+
+
+# install
+if [ $packageManager="dnf" ] then;
+	fileName="google-chrome.rpm"
+	wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm -O $fileName
+	$packageManager install $fileName -y
+fi
+
+if [ $packageManager="apt-get" ] then;
+	fileName="google.chrome.deb"
+	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O $fileName
+	dpkg -i install $fileName
+fi
+
+# cleanup
+rm $fileName

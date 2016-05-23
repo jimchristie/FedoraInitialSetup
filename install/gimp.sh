@@ -1,3 +1,5 @@
 #!/bin/bash
 
-sudo dnf install gimp -y
+source ../init/packageManager.sh
+
+$packageManager install gimp -y

@@ -1,3 +1,5 @@
 #!/bin/bash
 
-sudo dnf install unzip -y
+source ../init/packageManager.sh
+
+$packageManager install unzip -y
