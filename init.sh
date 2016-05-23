@@ -3,6 +3,22 @@
 pwd=`pwd`
 installsDirectory="$pwd/install"
 logFile="$pwd/log"
+distro=`lsb_release -si`
+dnf=(Fedora)
+apt=(Ubuntu Debian)
+
+# assign the packageManager variable
+for item in "${dnf[@]}"; do
+	if [[ $distro = "$item" ]]; then
+		packageManager="dnf"
+	fi
+done
+
+for item in "${apt[@]}"; do
+	if [[ $distro = "$item" ]]; then
+		packageManager="apt-get"
+	fi
+done
 
 initialLoop(){
 	cd init
@@ -26,7 +42,7 @@ installLoop(){
 		chown $SUDO_USER $installFile
 		chgrp $SUDO_USER $installFile
 		chmod 665 $installFile >> $logFile 2>&1;
-		./$installFile >> $logFile 2>&1;
+		./$installFile packageManager="$packageManager" >> $logFile 2>&1;
 
 	done
 
