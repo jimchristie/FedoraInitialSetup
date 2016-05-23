@@ -3,7 +3,6 @@
 pwd=`pwd`
 installsDirectory="$pwd/install"
 logFile="$pwd/log"
-user=`whoami`
 
 initialLoop(){
 	cd init
