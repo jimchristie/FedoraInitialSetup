@@ -10,7 +10,7 @@
 # The RPMFusion provides some free and non-free software for Fedora. 
 # The repository is meant to provide stable and tested packages for Fedora.
 
-source packageManager.sh
+$packageManager=$1
 
 if [ $packageManager="dnf" ]; then
 
@@ -28,7 +28,7 @@ fi
 
 ################################################################################
 
-if [ $packageManager="dnf" ]; then
+if [ $packageManager="apt-get" ]; then
 
 	# add some repos here
 

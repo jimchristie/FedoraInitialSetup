@@ -1,5 +1,5 @@
 #!/bin/bash
 
-source ../init/packageManager.sh
+$packageManager=$1
 
 $packageManager install nano -y

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ../init/packageManager.sh
+$packageManager=$1
 
 if [ $packageManager="dnf" ] then;
 	$packageManager copr enable region51/chrome-gnome-shell -y

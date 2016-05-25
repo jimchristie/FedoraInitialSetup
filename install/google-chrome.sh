@@ -1,21 +1,6 @@
 #!/bin/bash
 
-# download
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
-
-# install
-dnf install google-chrome-stable_current_x86_64.rpm -y
-
-# cleanup
-rm google-chrome-stable_current_x86_64.rpm
-
-
-
-
-
-
-source ../init/packageManager.sh
-
+$packageManager=$1
 
 # install
 if [ $packageManager="dnf" ] then;

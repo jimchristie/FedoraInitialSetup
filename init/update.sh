@@ -1,7 +1,6 @@
 #!/bin/bash
 
-source packageManager.sh
-$packageManager update -y
+$packageManager=$1
 
 if [ $packageManager="dnf" ] then;
 	$packageManager update -y
