@@ -2,6 +2,7 @@
 
 pwd=`pwd`
 installsDirectory="$pwd/install"
+removeDirectory="$pwd/remove"
 logFile="$pwd/log"
 distro=`lsb_release -si`
 dnf=(Fedora)
@@ -49,7 +50,25 @@ installLoop(){
 	cd ..
 }
 
+
+removeLoop(){
+	cd $removeDirectory
+
+	for removeFile in `ls *.sh`
+	do	
+		chown $SUDO_USER $removeFile
+		chgrp $SUDO_USER $removeFile
+		chmod 665 $removeFile >> $logFile 2>&1;
+		./$removeFile $packageManager >> $logFile 2>&1;
+
+	done
+
+	cd ..
+}
+
 initialLoop
+
+removeLoop
 
 installLoop
 
