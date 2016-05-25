@@ -9,13 +9,13 @@ apt=(Ubuntu Debian)
 
 # assign the packageManager variable
 for item in "${dnf[@]}"; do
-	if [[ $distro = "$item" ]]; then
+	if [[ "$distro" = "$item" ]]; then
 		packageManager="dnf"
 	fi
 done
 
 for item in "${apt[@]}"; do
-	if [[ $distro = "$item" ]]; then
+	if [[ "$distro" = "$item" ]]; then
 		packageManager="apt-get"
 	fi
 done
@@ -28,7 +28,7 @@ initialLoop(){
 		chown $SUDO_USER $initFile
 		chgrp $SUDO_USER $initFile			
 		chmod 665 $initFile > $logFile 2>&1;
-		./$initFile >> $logFile 2>&1;
+		./$initFile $packageManager >> $logFile 2>&1;
 	done
 
 	cd ..
@@ -42,7 +42,7 @@ installLoop(){
 		chown $SUDO_USER $installFile
 		chgrp $SUDO_USER $installFile
 		chmod 665 $installFile >> $logFile 2>&1;
-		./$installFile packageManager="$packageManager" >> $logFile 2>&1;
+		./$installFile $packageManager >> $logFile 2>&1;
 
 	done
 
@@ -53,6 +53,10 @@ initialLoop
 
 installLoop
 
+# run update again just in case any of the manually downloaded packages were outdated
+cd init
+./update.sh >> $logFile 2>&1;
+cd ..
+
 chown $SUDO_USER $logFile
 chgrp $SUDO_USER $logFile
-
