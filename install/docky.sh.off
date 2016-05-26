@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# packageManager=$1
+
+# I think the "Dash to Dock" gnome shell extension works better
+# $packageManager install docky -y
