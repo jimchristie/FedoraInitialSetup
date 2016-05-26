@@ -6,6 +6,6 @@ if [ "$packageManager" = "dnf" ]; then
 	$packageManager remove rhythmbox -y
 fi
 
-if [ "$pakcageManager" = "apt-get" ]; then
+if [ "$packageManager" = "apt-get" ]; then
 	$packageManager purge rhythmbox -y
 fi
