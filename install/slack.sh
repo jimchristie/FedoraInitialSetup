@@ -12,7 +12,8 @@ fi
 if [ "$packageManager" == "apt-get" ]; then
 	fileName="slack.deb"
 	wget https://downloads.slack-edge.com/linux_releases/slack-desktop-2.0.6-amd64.deb -O $fileName
-	dpkg -i install $fileName
+	dpkg -i $fileName
+	apt-get install -f -y
 fi
 
 # cleanup

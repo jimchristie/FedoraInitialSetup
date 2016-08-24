@@ -8,7 +8,7 @@ if [ "$packageManager" = "dnf" ]; then
 fi 
 
 if [ "$packageManager" = "apt-get" ]; then
-	add-apt-repository ppa:ne0sight/chrome-gnome-shell
+	add-apt-repository ppa:ne0sight/chrome-gnome-shell -y
 	$packageManager update
-	$packageManager install chrome-gnome-shell
+	$packageManager install chrome-gnome-shell -y
 fi

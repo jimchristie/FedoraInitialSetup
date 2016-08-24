@@ -11,8 +11,9 @@ if [ "$packageManager" = "dnf" ]; then
 fi
 
 if [ "$packageManager" = "apt-get" ]; then
+	fileName="dropbox.deb"
 	wget https://linux.dropbox.com/packages/ubuntu/dropbox_2015.10.28_amd64.deb -O $fileName
-	dpkg -i install dropbox.deb
+	dpkg -i dropbox.deb
 fi
 
 # cleanup

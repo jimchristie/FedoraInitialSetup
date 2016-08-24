@@ -22,13 +22,15 @@ for item in "${apt[@]}"; do
 done
 
 initialLoop(){
+	
+	echo "******************* init loop ***********************" > $logFile 2>&1
 	cd init
 
 	for initFile in `ls *.sh` 
 	do
 		chown $SUDO_USER $initFile
 		chgrp $SUDO_USER $initFile			
-		chmod 665 $initFile > $logFile 2>&1;
+		chmod 665 $initFile >> $logFile 2>&1;
 		./$initFile $packageManager >> $logFile 2>&1;
 	done
 
@@ -36,6 +38,8 @@ initialLoop(){
 }
 
 installLoop(){
+
+	echo "******************* install loop ***********************" >> $logFile 2>&1
 	cd $installsDirectory
 
 	for installFile in `ls *.sh`
@@ -52,10 +56,13 @@ installLoop(){
 
 
 removeLoop(){
+
+	echo "******************* remove loop ***********************" >> $logFile 2>&1
 	cd $removeDirectory
 
 	for removeFile in `ls *.sh`
 	do	
+		echo "**************** removeFile $removeFile *********************" >> $logFile 2>&1
 		chown $SUDO_USER $removeFile
 		chgrp $SUDO_USER $removeFile
 		chmod 665 $removeFile >> $logFile 2>&1;
@@ -66,11 +73,11 @@ removeLoop(){
 	cd ..
 }
 
-initialLoop
+#initialLoop
 
 removeLoop
 
-installLoop
+#installLoop
 
 # run update again just in case any of the manually downloaded packages were outdated
 cd init

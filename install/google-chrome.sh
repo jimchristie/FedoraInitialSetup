@@ -12,7 +12,8 @@ fi
 if [ "$packageManager" == "apt-get" ]; then
 	fileName="google.chrome.deb"
 	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O $fileName
-	dpkg -i install $fileName
+	dpkg -i $fileName
+	$packageManager -f install -y
 fi
 
 # cleanup
