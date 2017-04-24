@@ -3,7 +3,7 @@
 pwd=`pwd`
 installsDirectory="$pwd/install"
 removeDirectory="$pwd/remove"
-logFile="$pwd/log"
+#logFile="$pwd/log"
 distro=`lsb_release -si`
 dnf=(Fedora)
 apt=(Ubuntu Debian)
@@ -23,15 +23,15 @@ done
 
 initialLoop(){
 	
-	echo "******************* init loop ***********************" > $logFile 2>&1
+	echo "******************* init loop ***********************"
 	cd init
 
 	for initFile in `ls *.sh` 
 	do
 		chown $SUDO_USER $initFile
 		chgrp $SUDO_USER $initFile			
-		chmod 665 $initFile >> $logFile 2>&1;
-		./$initFile $packageManager >> $logFile 2>&1;
+		chmod 665 $initFile
+		./$initFile $packageManager
 	done
 
 	cd ..
@@ -39,15 +39,15 @@ initialLoop(){
 
 installLoop(){
 
-	echo "******************* install loop ***********************" >> $logFile 2>&1
+	echo "******************* install loop ***********************"
 	cd $installsDirectory
 
 	for installFile in `ls *.sh`
 	do	
 		chown $SUDO_USER $installFile
 		chgrp $SUDO_USER $installFile
-		chmod 665 $installFile >> $logFile 2>&1;
-		./$installFile $packageManager >> $logFile 2>&1;
+		chmod 665 $installFile
+		./$installFile $packageManager
 
 	done
 
@@ -57,32 +57,31 @@ installLoop(){
 
 removeLoop(){
 
-	echo "******************* remove loop ***********************" >> $logFile 2>&1
+	echo "******************* remove loop ***********************"
 	cd $removeDirectory
 
 	for removeFile in `ls *.sh`
 	do	
-		echo "**************** removeFile $removeFile *********************" >> $logFile 2>&1
+		echo "**************** removeFile $removeFile *********************"
 		chown $SUDO_USER $removeFile
 		chgrp $SUDO_USER $removeFile
-		chmod 665 $removeFile >> $logFile 2>&1;
-		./$removeFile $packageManager >> $logFile 2>&1;
-
+		chmod 665 $removeFile
+		./$removeFile $packageManager
 	done
 
 	cd ..
 }
 
-#initialLoop
+initialLoop
 
 removeLoop
 
-#installLoop
+installLoop
 
 # run update again just in case any of the manually downloaded packages were outdated
 cd init
-./update.sh >> $logFile 2>&1;
+./update.sh
 cd ..
 
-chown $SUDO_USER $logFile
-chgrp $SUDO_USER $logFile
+#chown $SUDO_USER $logFile
+#chgrp $SUDO_USER $logFile
